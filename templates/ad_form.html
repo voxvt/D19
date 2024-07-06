@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>{% if ad %}Редактировать{% else %}Создать{% endif %} объявление</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if ad %}Сохранить{% else %}Создать{% endif %}</button>
+  </form>
+  <a href="{% url 'ads_list' %}">Назад к объявлениям</a>
+{% endblock %}
+
+{% block extra_scripts %}
+  {{ form.media }}
+{% endblock %}

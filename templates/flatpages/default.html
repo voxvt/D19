@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}MMORPG Board{% endblock %}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><a href="{% url 'ads_list' %}">MMORPG Board</a></h1>
+    </header>
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+    <footer>
+      <p>&copy; 2024 MMORPG Board</p>
+    </footer>
+  </div>
+</body>
+</html>
