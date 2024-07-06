@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from ckeditor_5.fields import CKEditor5Field
+from django_ckeditor_5.fields import CKEditor5Field
 
 class CustomUser(AbstractUser):
     bio = models.TextField(blank=True, null=True)

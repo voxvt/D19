@@ -9,8 +9,9 @@ from django.contrib.auth.models import User
 from .forms import NewsletterForm
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .filters import AdFilter
 
-class AdsList(ListView):
+class AdsList(FilterView):
     model = Ad
     ordering = "-created_at"
     template_name = "ads_list.html"
@@ -19,7 +20,7 @@ class AdsList(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        self.filterset = AdFilter(self.request.Get, queryset=queryset)
+        self.filterset = AdFilter(self.request.GET, queryset=queryset)
         return self.filterset.qs
 
     def get_context_data(self, **kwargs):

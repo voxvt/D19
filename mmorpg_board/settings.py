@@ -38,14 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
     'board',
+    'django_filters',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'django_apscheduler',
-    'ckeditor_5',
-    'ckeditor_filebrowser',
+    'django_ckeditor_5',
+   # 'ckeditor_filebrowser',
 
 ]
 
@@ -57,9 +60,9 @@ CKEDITOR_5_CONFIGS = {
      }
  }
 
-CKEDITOR_UPLOAD_PATH = "uploads/"
+STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 SITE_ID = 1
 LOGIN_URL = '/accounts/login/'
