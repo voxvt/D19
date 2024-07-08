@@ -2,6 +2,7 @@ from django import forms
 from .models import Ad, Response
 from allauth.account.forms import SignupForm
 from django import forms
+from django_ckeditor_5.widgets import CKEditor5Widget
 
 class CustomSignupForm(SignupForm):
     first_name = forms.CharField(max_length=30, label='First Name')
@@ -15,13 +16,16 @@ class CustomSignupForm(SignupForm):
         return user
 
 
+class CKEditor5FieldForm(forms.Form):
+    content = forms.CharField(widget=CKEditor5Widget(attrs={'class': 'form-control'}))
+
 class AdForm(forms.ModelForm):
     class Meta:
         model = Ad
         fields = ['title', 'content', 'category']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'content': forms.Textarea(attrs={'class': 'form-control'}),
+            'content': CKEditor5Widget(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control'}),
         }
         labels = {

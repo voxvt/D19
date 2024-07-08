@@ -1,10 +1,16 @@
-{% extends "base_generic.html" %}
+{% extends "flatpages/default.html" %}
 
 {% block content %}
-  <h1>Отправка новостной рассылки</h1>
-  <form method="post">
+<h1>Отправить рассылку</h1>
+<form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="btn btn-primary">Отправить</button>
-  </form>
+</form>
+
+{% if email_sent %}
+    <div class="alert alert-success mt-3">
+        Письмо успешно отправлено!
+    </div>
+{% endif %}
 {% endblock %}

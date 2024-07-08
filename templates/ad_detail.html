@@ -1,11 +1,11 @@
-{% extends "base_generic.html" %}
+{% extends "flatpages/default.html" %}
 
 {% block content %}
   <h1>{{ ad.title }}</h1>
-  <p><strong>Категория:</strong> {{ ad.category.name }}</p>
+  <p><strong>Категория:</strong> {{ ad.category }}</p>
   <p><strong>Создано:</strong> {{ ad.created_at }}</p>
   <p><strong>Обновлено:</strong> {{ ad.updated_at }}</p>
-  <div>{{ ad.content|safe }}</div> {# Используйте |safe чтобы сохранить HTML-разметку #}
+  <div>{{ ad.content|safe }}</div>
 
   {% if request.user == ad.user %}
     <a href="{% url 'ad_update' ad.id %}" class="btn btn-primary">Редактировать</a>
@@ -18,17 +18,17 @@
   <ul>
     {% for response in responses %}
       <li>
-        <div>{{ response.content|safe }}</div> {# Используйте |safe чтобы сохранить HTML-разметку #}
+        <div>{{ response.content|safe }}</div>
         <p><small>Автор: {{ response.user.username }} | Создано: {{ response.created_at }}</small></p>
         {% if request.user == ad.user %}
-          <form method="post" action="{% url 'response_accept' response.id %}">
-            {% csrf_token %}
-            {% if not response.is_accepted %}
+          {% if not response.is_accepted %}
+            <form method="post" action="{% url 'response_accept' response.id %}">
+              {% csrf_token %}
               <button type="submit" class="btn btn-success">Принять отклик</button>
-            {% else %}
-              <span class="badge badge-success">Принято</span>
-            {% endif %}
-          </form>
+            </form>
+          {% else %}
+            <span class="badge badge-success">Принято</span>
+          {% endif %}
           <form method="post" action="{% url 'response_delete' response.id %}">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger">Удалить отклик</button>
@@ -43,7 +43,7 @@
   <hr>
 
   <h2>Оставить отклик</h2>
-  <form method="post" action="{% url 'response_create' ad.id %}">
+  <form method="post" action="{% url 'response_create' ad_id=ad.pk %}">
     {% csrf_token %}
     <div class="form-group">
       <label for="id_content">{{ response_form.content.label_tag }}</label>
